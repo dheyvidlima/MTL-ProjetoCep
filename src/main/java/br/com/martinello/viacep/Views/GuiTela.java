@@ -2,9 +2,12 @@ package br.com.martinello.viacep.Views;
 
 import br.com.martinello.viacep.Control.CepControl;
 import br.com.martinello.viacep.Control.CepGS;
+import br.com.martinello.viacep.Domain.CepDAO;
+import br.com.martinello.viacep.Domain.ErrosDB;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class GuiTela extends JFrame {
 
@@ -23,6 +28,8 @@ public class GuiTela extends JFrame {
     private final JLabel labelLogradouro;
     private final JLabel labelBairro;
     private final JLabel labelUf;
+    private final JTable table;
+    private final DefaultTableModel model;
 
     private final JLabel labelComplemento;
     private final JLabel labelIbge;
@@ -41,6 +48,7 @@ public class GuiTela extends JFrame {
         labelUf = new JLabel("UF");
         labelComplemento = new JLabel("Complemento");
         labelIbge = new JLabel("Código do IBGE");
+        table = new JTable();
 
         labelCep.setBounds(130, 10, 240, 15);
         labelLocalicade.setBounds(130, 50, 240, 15);
@@ -57,6 +65,9 @@ public class GuiTela extends JFrame {
         labelUf.setForeground(Color.BLACK);
         labelComplemento.setForeground(Color.BLACK);
         labelIbge.setForeground(Color.BLACK);
+
+        table.setAutoResizeMode(WIDTH);
+        table.setVisible(true);
 
         container.add(labelCep);
         container.add(labelLocalicade);
@@ -89,6 +100,19 @@ public class GuiTela extends JFrame {
         container.add(textUf);
         container.add(textComplemento);
         container.add(textIbge);
+        container.add(table);
+
+        table.getModel();
+
+        model = (DefaultTableModel) table.getModel();
+
+        model.addColumn("Cep");
+        model.addColumn("Localidade");
+        model.addColumn("UF");
+        model.addColumn("Codigo IBGE");
+        model.addColumn("Bairro");
+        model.addColumn("Logradouro");
+        model.addColumn("Complemento");
 
         botaoBuscar = new JButton("Buscar");
 
@@ -111,7 +135,7 @@ public class GuiTela extends JFrame {
                 textLocalidade.setText(CepGS.getLOCALIDADE());
                 textLogradouro.setText(CepGS.getLOGRADOURO());
                 textUf.setText(CepGS.getUF());
-                
+
                 JOptionPane.showMessageDialog(null, "Concluído");
             } catch (SQLException | IOException ex) {
                 Logger.getLogger(GuiTela.class.getName()).log(Level.SEVERE, null, ex);

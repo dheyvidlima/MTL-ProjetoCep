@@ -98,6 +98,8 @@ public class ErrosDB {
             System.out.println("IBGE = " + rs.getString("codigo_ibge"));
 
         }
+        
+            
 
         conn.close();
     }
