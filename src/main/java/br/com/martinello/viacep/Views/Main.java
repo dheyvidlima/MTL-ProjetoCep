@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 
-public class UploadCep {
+public class Main {
 
     public static void main(String[] args) throws SQLException, IOException {
 
-        GuiTela gui = new GuiTela();
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Frame frame = new Frame();
+        frame.setVisible(true);
 
     }
 
